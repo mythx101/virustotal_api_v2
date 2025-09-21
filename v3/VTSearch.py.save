@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+# author: Alan Lee
+# VTSearch.py - Searching VT for files/url
+
+import urllib3
+import sys
+import argparse
+import urllib
+from urllib.parse import urlencode
+#import postfile #requires postfile.py to be installed (get from http://code.activestate.com/recipes/146306/)
+import time
+import os
+import requests
+import logging
+
+
+LOGGING_LEVEL = logging.INFO  # Modify if you just want to focus on errors
+logging.basicConfig(level=LOGGING_LEVEL,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    stream=sys.stdout)
+
+myapikey = 'd8a3b280436173ab539d748127a0c3f22f8eda6a2ed0c41872a667dd943dabf8'
+
+vt_searchurl = 'https://www.virustotal.com/api/v3/intelligence/search'
+
+proxies = { "http://proxy.labs.localsite.sophos:8080", "https://proxy.labs.localsite.sophos:8080" }
+
+args = parser.parse_args()
+
+if args.query:
+    vtquery(args.query)
+
+
+def __init__(self, apikey, num_files):
+    self.apikey = apikey
+    self.num_files = num_files
+    self.queue = asyncio.Queue() async def main():
+    self._sessions = []
+    parser = argparse.ArgumentParser(description='VTSearch for file and urls') 
+    parser.add_argument("-q", "--query", help="VT query search string", type=str)
+
+
+#searching using query string
+async def vtquery(query_string):
+
+    print("querytest")
+    encoded_query_string = urllib.parse.quote(query_string)
+    formatted_query_string = '?query={}'.format(encoded_query_string)
+    print(formatted_query_string)
+    parameters = {"query": formatted_query_string, "apikey": myapikey, "proxies": proxies}
+    data = urlencode(parameters)
+
+    http = urllib3.PoolManager()
+
+    req = http.request('GET', vt_searchurl, data)
+
+    try:
+        response = urllib3.urlopen(req)
+        print(response)
+    except Exception:
+        print("Unknown error")
+    json = response.read()
+    # parse result from Virustotal
+    #print json
+    process_result(json)
+
+    return;
+
+
+
+
+
+if __name__ == "__main__":
+        main()
+
